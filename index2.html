@@ -1,63 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Fruzsi</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.3/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.3/brython_stdlib.js"></script>
+    <script type="text/python">
+        from browser import document as D
+        from browser.html import TABLE, TR, TD, DIV, H1
+        from random import shuffle as kever, randrange as rr
+        n = list(range(4,17,2))[rr(7)]
+        kk = [129402, 128000, 127744][rr(3)]
+        if n < 16: kk += rr(100 // n)
+        u = []
+        def f(e):
+            if len(u)==0:
+                e.target.childNodes[0].style.display = "block"
+                e.target.unbind("click", f)
+                u.append(e.target)
+            elif len(u)==1:
+                e.target.childNodes[0].style.display = "block"
+                e.target.unbind("click", f)
+                v = u[0]
+                if e.target.id != v.id:
+                    if e.target.childNodes[0].innerHTML != v.childNodes[0].innerHTML: u.append(e.target)
+                    else: u.pop()
+            else:
+                e.target.unbind("click", f)
+                q = u.pop(); q.childNodes[0].style.display = "none"; q.bind("click", f)
+                q = u.pop(); q.childNodes[0].style.display = "none"; q.bind("click", f)
+                e.target.childNodes[0].style.display = "block"
+                u.append(e.target)
+        t = list(map(lambda x: DIV(chr(x) if x != 129484 else "🪶"), list(range(kk, kk + n * n // 2)) * 2))
+        kever(t)
+        D <= H1("Memóriajáték")
+        D <= TABLE([TR(map(TD, row)) for row in [[t[i + n * j] for j in range(n)] for i in range(n)]])
+        for e in D.select("TD"):
+            e.bind("click", f)
+            e.id = f'l{e.cellIndex}-{e.parent.rowIndex}'
 
+    </script>
+    <style>
+        body {
+            text-align: center;
+            user-select: none;
+            background-color: antiquewhite;
+        }
 
+        table {
+            margin: auto;
+            border-spacing: 4px;
+        }
+
+        h1 {
+            text-shadow: 1px 1px 3px rgb(34, 46, 49);
+            color: rgb(19, 67, 99);
+        }
+
+        td {
+            width: 55px;
+            height: 55px;
+            text-align: center;
+            user-select: none;
+            font-size: 40px;
+            border-radius: 6px;
+            background-color: rgb(184, 221, 226);
+            color: rgb(19, 66, 85);
+            box-shadow: 1px 1px 3px inset black;
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        td div {
+            text-shadow: 1px 1px 3px rgb(34, 46, 49);
+            display: none;
+        }
+    </style>
 </head>
 
-<body>
-  <h1>Miszlai Fruzsina</h1>  
-  <a href="órarend.html">Ez az órarendem</a>
-  <a href="sakk.html">Ez meg a sakk</a>
-  <p><h2>Hobbijaim:</h2></p>
-  <li>úszás</li>
-  <img id="k1" src="https://biotechusa.hu/sites/testbiotechusashop/documents/blog/_extra/292/big_swimming_20161126105434.jpg"> <br>
-  <li>olvasás</li>
-  <img id="k2" src="https://kapos.hu/static/keptar/13/b/9875"> <br>
-  <li>zenehallgatás</li>
-  <img id="k3" src="https://colore.hu/wp-content/uploads/2021/12/zenehallgatas.jpg"> <br>
-    <p><h2>Kedvenc állataim:</h2></p>
-    <li>kutya</li>
-    <img id="k4" src="https://magazin.petissimo.hu/uploads/cropped/tacsko_szembol_mutermi_crop_61404642e278a.jpg?v=5"> <br>
-    <li>alvás</li> 
-    <img id="k5" src="https://www.activebeauty.hu/imgs/1440/1000/85/data/HU/wp-content/uploads/2018/09/dm_ab-08-2018_schoenheit-Pflege_header.jpg">
+<body onload="brython()">
+<h1>Miszlai Fruzsina</h1>
+<a href="sakk.html">link a sakkhoz</a>
+<a href="órarend2.html">link az órarendemhez</a>
+
+<a href="https://www.youtube.com/watch?v=USppwjVG43I">menö zene;D</a>
+<br>
+<a href="https://github.com/fruzsimiszlai/honlap/settings/pages">ez a csodás github fiókom:P</a><br>
+<hr>
+<p>
+<h2>Hobbijaim:</h2></p>
+<li>úszás</li>
+<img id="k1"
+     src="https://biotechusa.hu/sites/testbiotechusashop/documents/blog/_extra/292/big_swimming_20161126105434.jpg">
+<br>
+<li>olvasás</li>
+<img id="k2" src="https://kapos.hu/static/keptar/13/b/9875"> <br>
+<li>zenehallgatás</li>
+<img id="k3" src="https://colore.hu/wp-content/uploads/2021/12/zenehallgatas.jpg"> <br>
+<p>
+<h2>Kedvenc állataim:</h2></p>
+<li>kutya</li>
+<img id="k4" src="https://s.24.hu/app/uploads/sites/11/2018/05/thinkstockphotos-521697453-e1526731524153.jpg"> <br>
+<li>alvás</li>
+<img id="k5"
+     src="https://www.activebeauty.hu/imgs/1440/1000/85/data/HU/wp-content/uploads/2018/09/dm_ab-08-2018_schoenheit-Pflege_header.jpg">
 </body>
 <style>
     img#k1 {
         width: 500px;
-        border-radius:16px;
-        box-shadow: 2px 2px 5px black;   
-    }
-    body{
-        text-align: center;
-        background: url(https://media3.giphy.com/media/WYsDOuRz0dcKQ/200w.gif?cid=82a1493bmmgvvby4o2f8pyk5i3hz5z8c83zr6pfy09mreecr&rid=200w.gif&ct=g) ;
-    }
-</style>
-<style>
-    img#k2 {
-        width: 500px;
-        border-radius:16px;
+        border-radius: 16px;
         box-shadow: 2px 2px 5px black;
-       
     }
 
-</style>
-<style>
+    img#k2 {
+        width: 500px;
+        border-radius: 16px;
+        box-shadow: 2px 2px 5px black;
+
+    }
+
     img#k3 {
         width: 500px;
-        border-radius:16px;
+        border-radius: 16px;
         box-shadow: 2px 2px 5px black;
     }
-</style>
-<style>
+
     img#k4 {
         width: 500px;
-        border-radius:16px;
+        border-radius: 16px;
         box-shadow: 2px 2px 5px black;
     }
-</style>
-<style>
+
     img#k5 {
         width: 500px;
-        border-radius:16px;
+        border-radius: 16px;
         box-shadow: 2px 2px 5px black;
     }
+
+    body {
+        text-align: center;
+    }
 </style>
+</html>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+S
