@@ -1,0 +1,25 @@
+<input type="number" value="1" onchange="r=Number(this.value);f()">
+<input type="number" value="1" onchange="cb=Number(this.value);f()">
+<hr>
+átmérő: <span id="b"></span>
+<hr>
+Kör kerület: <span id="k"></span>
+<hr>
+Kör Terület: <span id="t"></span>
+<script>
+    a = 1
+    c = 1
+    function f() {
+        b = 2 * r
+        k = 2 * r * Math.PI
+        t = r**2 * Math.PI
+        document.getElementById("b").innerHTML = b
+        document.getElementById("k").innerHTML = k
+        document.getElementById("t").innerHTML = t
+    }
+</script>
+<style>
+    span {
+        background-color: rgb(255, 127, 170);
+    }
+</style>
